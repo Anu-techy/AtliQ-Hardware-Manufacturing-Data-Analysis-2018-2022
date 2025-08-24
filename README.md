@@ -8,7 +8,7 @@ The goal was to provide unified insights across **Finance, Sales, Marketing, and
 - **Programming & Libraries:** Python (Pandas, Matplotlib, Seaborn, Scikit-learn)  
 - **Database:** MySQL (Advanced Queries, Summaries, Indexing)  
 - **Visualization & Modeling:** Power BI (Snowflake Schema, DAX, DAX Studio Optimization)  
-- **Machine Learning:** Discount Anomaly Detection, Customer Segmentation, Product Recommendation System  
+
 
 ## 📂 Project Workflow
 - **Data Cleaning & Preprocessing** – handled missing values, and performed integration using Pandas.  
@@ -20,10 +20,7 @@ The goal was to provide unified insights across **Finance, Sales, Marketing, and
   - Marketing (Campaign Impact, Product Trends)  
   - Supply Chain (Inventory, Demand Fulfillment)  
   - Executive View (Unified KPIs)  
-- **Machine Learning Applications** –  
-  - **Discount Anomaly Detection** – identified unusual discount patterns.  
-  - **Customer Segmentation (Clustering)** – grouped customers by purchasing behavior.  
-  - **Recommendation System** – suggested Top 5 products per customer using purchase history.
+- **Machine Learning Applications** –  Discount Anomaly Detection, Customer Segmentation (Clustering), Recommendation System for product
  
   
 ## 📊 Dashboard 
