@@ -1,10 +1,11 @@
 ## 🏭 AtliQ Computer Hardware Manufacturing Data Analysis (2018–2022, 1.8M+ Records)
 
-This project is an **end-to-end data analysis** of AtliQ Hardware’s manufacturing and sales data (2018–2022, 1.8M+ records) using **Python, SQL, Power BI, and Machine Learning**.  
+This project is an end-to-end data analysis of AtliQ Hardware’s manufacturing and sales data (2018–2022, 1.8M+ records).
 
-The goal was to provide unified insights across **Finance, Sales, Marketing, and Supply Chain** to support better strategic decisions.
+The goal was to provide unified insights across Finance, Sales, Marketing, and Supply Chain to support better strategic decisions.
 
 ## 🔧 Tech Stack
+
 - **Programming & Libraries:** Python (Pandas, Matplotlib, Seaborn, Scikit-learn)  
 - **Database:** MySQL (Advanced Queries, Summaries, Indexing)  
 - **Visualization & Modeling:** Power BI (Snowflake Schema, DAX, DAX Studio Optimization)  
