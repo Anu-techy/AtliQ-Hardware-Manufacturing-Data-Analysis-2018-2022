@@ -25,7 +25,7 @@ The goal was to provide unified insights across Finance, Sales, Marketing, and S
  
   
 ## 📊 Dashboard 
-[Trip Analysis Power BI Dashboard](https://app.powerbi.com/groups/me/reports/03dcdab8-dd6a-414c-9ed4-7e6119702818/7d4b6744dc52fbf9f34e?experience=power-bi)
+[Insights 360 Dashboard](https://app.powerbi.com/groups/me/reports/03dcdab8-dd6a-414c-9ed4-7e6119702818/7d4b6744dc52fbf9f34e?experience=power-bi)
 
 ---
 
