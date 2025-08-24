@@ -20,10 +20,39 @@ The goal was to provide unified insights across **Finance, Sales, Marketing, and
   - Marketing (Campaign Impact, Product Trends)  
   - Supply Chain (Inventory, Demand Fulfillment)  
   - Executive View (Unified KPIs)  
-- **Performance Optimization** – optimized model size & performance using DAX Studio.  
 - **Machine Learning Applications** –  
   - **Discount Anomaly Detection** – identified unusual discount patterns.  
   - **Customer Segmentation (Clustering)** – grouped customers by purchasing behavior.  
   - **Recommendation System** – suggested Top 5 products per customer using purchase history.
  
-  - 
+  
+## 📊 Dashboard 
+[Trip Analysis Power BI Dashboard](https://app.powerbi.com/groups/me/reports/03dcdab8-dd6a-414c-9ed4-7e6119702818/7d4b6744dc52fbf9f34e?experience=power-bi)
+
+---
+
+## ▶️ Demo Video
+🎥 [Dashboard YouTube Demo](https://www.youtube.com/watch?v=gyXi7Qqxecs))  
+
+---
+
+##  📂 Project Structure
+
+|         File                | Description |
+|-----------------------------|-------------|
+| `NYC EDA-1.ipynb, NYC EDA-2.ipynb`       | for preprocessing and handling nulls |
+| `Queries.txt` | SQL queries for EDA and business insights with results |
+| `Storedprocedures.txt`      | Stored procedures (Zone summary, borough details) |
+| `dashboards/powerbi_dashboard.pbix`  | Power BI dashboard file with interactive visuals |
+| `TripVolume_prediction.ipynb, Clustering.ipynb`  | Machine Learning Models |
+| `README.md`                           | Project documentation |
+
+
+
+## 👤 Author
+**Analysis & Dashboard by Anusha**  
+- 💻 GitHub: [https://github.com/Anu-techy]  
+- 🎥 YouTube: [https://www.youtube.com/@DataDiveWithAnvi]  
+- 🌐 LinkedIn: [https://www.linkedin.com/in/anusha-k-4ba9bb218/]  
+
+
