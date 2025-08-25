@@ -32,7 +32,7 @@ LIMIT 10;
 +------------------+-------------+---------------+
 
 ************************************************************
--- Top products have the highest total discount percentage
+-- Top products with highest total discount percentage
 ************************************************************
 
 SELECT 
@@ -153,3 +153,4 @@ ORDER BY t.qty DESC;
 | Sage          | AQ Pen Drive 2 IN 1 | Storage | South Korea | 2020-11-01 | 4679 |       9382.96 |
 | Neptune       | AQ Pen Drive DRC    | Storage | China       | 2020-12-01 | 4638 |       9714.11 |
 +---------------+---------------------+---------+-------------+------------+------+---------------+
+
