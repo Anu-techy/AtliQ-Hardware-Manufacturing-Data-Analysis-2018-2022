@@ -1,0 +1,54 @@
+-- Top 10 customers by total net sales in a given fiscal year
+
+SELECT
+        dc.customer,
+        dc.market,
+        SUM(t.net_sales_amt) AS total_sales
+FROM transactions t
+JOIN dim_customer  dc
+       ON t.customer_code = dc.customer_code
+WHERE t.fiscal_year = 2021
+GROUP BY
+       dc.customer,
+       dc.market,
+        t.customer_code
+ORDER BY total_sales DESC
+LIMIT 10;
+
++------------------+-------------+-------------+
+| Customer         | Market      | Total Sales |
++------------------+-------------+-------------+
+| Sage             | South Korea | 22,852,989.62 |
+| Leader           | South Korea | 22,382,309.37 |
+| Neptune          | China       | 20,140,614.05 |
+| Amazon           | India       | 19,067,578.96 |
+| Synthetic        | Philiphines | 14,134,892.59 |
+| AltiQ Exclusive  | India       | 13,210,585.65 |
+| Flipkart         | India       | 12,963,742.46 |
+| Novus            | Philiphines | 12,907,938.67 |
+| Electricalsocity | India       | 12,306,826.89 |
+| Amazon           | USA         | 11,897,816.51 |
++------------------+-------------+-------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Highest revenue-generating customers with in a given market
+-- Top 10 products have the highest total discount percentage
+-- Top 10 notebooks with highest discount percentage
+-- 
