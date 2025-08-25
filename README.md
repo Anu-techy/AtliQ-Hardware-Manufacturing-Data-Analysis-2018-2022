@@ -41,7 +41,7 @@ The goal was to provide unified insights across Finance, Sales, Marketing, and S
 | `AtliQ_preprocessing.ipynb`       | for preprocessing and handling nulls |
 | `Queries.txt` | SQL queries for EDA and business insights with results |
 | `Storedprocedures.txt`      | Highest performing customers |
-| `dashboard screenshots`  | Power BI dashboard file with interactive visuals |
+| `dashboard screenshots`  | Power BI dashboards with interactive visuals |
 | `TripVolume_prediction.ipynb, Clustering.ipynb`  | Machine Learning Models |
 | `README.md`                           | Project documentation |
 
