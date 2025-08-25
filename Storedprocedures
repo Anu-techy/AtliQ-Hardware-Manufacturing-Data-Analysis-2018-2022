@@ -1,0 +1,50 @@
+-- Stored Procedure to identify the highest revenue generating customers in a given market for a particular fiscal year.
+
+Create Procedure: CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTopCustomersByMarketYear`(
+    IN input_market VARCHAR(100),
+    IN input_year INT
+)
+BEGIN
+    SELECT
+        dc.customer,
+        dc.market,
+        t.customer_code,
+        SUM(t.net_sales_amt) AS total_sales
+    FROM transactions t
+    JOIN dim_customer dc
+        ON t.customer_code = dc.customer_code
+    WHERE dc.market = input_market
+      AND t.fiscal_year = input_year
+    GROUP BY
+        dc.customer,
+        dc.market,
+        t.customer_code
+    ORDER BY total_sales DESC
+    LIMIT 5;
+END
+
+
+CALL GetTopCustomersByMarketYear("India",2020);
+
++---------------+--------+---------------+-------------+
+| customer      | market | customer_code | total_sales |
++---------------+--------+---------------+-------------+
+| Amazon        | India  | 90002008      |  7840454.41 |
+| Flipkart      | India  | 90002009      |  5610472.54 |
+| Amazon        | India  | 90002016      |  4842666.08 |
+| Ebay          | India  | 90002010      |  4696826.94 |
+| Atliq e Store | India  | 70002018      |  4571311.70 |
++---------------+--------+---------------+-------------+
+
+CALL GetTopCustomersByMarketYear("South Korea",2021);
+
++-----------------+-------------+---------------+-------------+
+| customer        | market      | customer_code | total_sales |
++-----------------+-------------+---------------+-------------+
+| Sage            | South Korea | 80007195      | 22852989.62 |
+| Leader          | South Korea | 80007196      | 22382309.37 |
+| AltiQ Exclusive | South Korea | 70007198      |  6852367.49 |
+| Atliq e Store   | South Korea | 70007199      |  6055100.32 |
+| Amazon          | South Korea | 90007197      |  5866621.88 |
++-----------------+-------------+---------------+-------------+
+
