@@ -15,9 +15,9 @@ GROUP BY
 ORDER BY total_sales DESC
 LIMIT 10;
 
-+------------------+-------------+-------------+
-| Customer         | Market      | Total Sales |
-+------------------+-------------+-------------+
++------------------+-------------+---------------+
+| Customer         | Market      | Total Sales   |
++------------------+-------------+---------------+
 | Sage             | South Korea | 22,852,989.62 |
 | Leader           | South Korea | 22,382,309.37 |
 | Neptune          | China       | 20,140,614.05 |
@@ -28,7 +28,32 @@ LIMIT 10;
 | Novus            | Philiphines | 12,907,938.67 |
 | Electricalsocity | India       | 12,306,826.89 |
 | Amazon           | USA         | 11,897,816.51 |
-+------------------+-------------+-------------+
++------------------+-------------+---------------+
+
+-- Stored procedure to print Top 5 Highest revenue-generating customers with in a given market for a given fiscal year
+
+ Create Procedure: CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTopCustomersByMarketYear`(
+    IN input_market VARCHAR(100),
+    IN input_year INT
+)
+BEGIN
+    SELECT
+        dc.customer,
+        dc.market,
+        t.customer_code,
+        SUM(t.net_sales_amt) AS total_sales
+    FROM transactions t
+    JOIN dim_customer dc
+        ON t.customer_code = dc.customer_code
+    WHERE dc.market = input_market
+      AND t.fiscal_year = input_year
+    GROUP BY
+        dc.customer,
+        dc.market,
+        t.customer_code
+    ORDER BY total_sales DESC
+    LIMIT 5;
+END
 
 
 
@@ -37,18 +62,7 @@ LIMIT 10;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
--- Highest revenue-generating customers with in a given market
 -- Top 10 products have the highest total discount percentage
 -- Top 10 notebooks with highest discount percentage
 -- 
+
