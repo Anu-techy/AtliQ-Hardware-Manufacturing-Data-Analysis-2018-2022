@@ -45,7 +45,13 @@ The goal was to provide unified insights across Finance, Sales, Marketing, and S
 | `TripVolume_prediction.ipynb, Clustering.ipynb`  | Machine Learning Models |
 | `README.md`                           | Project documentation |
 
+## Insights
+Here are some key insights from the analysis:  
 
+- 📉 Healthy gross margin, but negative net profit → need to prioritize reducing high operating expenses.  
+- 🌍 India and USA are the top markets, with South Korea emerging as a strong growth region.  
+- 💵 A reasonable portion of sales is retained after applying discounts, indicating effective pricing strategies.  
+- 💻 Notebooks are the highest-demand products, followed by Peripherals.  
 
 ## 👤 Author
 **Analysis & Dashboard by Anusha**  
