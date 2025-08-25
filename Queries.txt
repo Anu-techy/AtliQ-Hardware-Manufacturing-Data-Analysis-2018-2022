@@ -1,5 +1,6 @@
+****************************************************************
 -- Top 10 customers by total net sales in a given fiscal year
-
+*****************************************************************
 SELECT
         dc.customer,
         dc.market,
@@ -30,39 +31,125 @@ LIMIT 10;
 | Amazon           | USA         | 11,897,816.51 |
 +------------------+-------------+---------------+
 
--- Stored procedure to print Top 5 Highest revenue-generating customers with in a given market for a given fiscal year
+************************************************************
+-- Top products have the highest total discount percentage
+************************************************************
 
- Create Procedure: CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTopCustomersByMarketYear`(
-    IN input_market VARCHAR(100),
-    IN input_year INT
-)
-BEGIN
-    SELECT
-        dc.customer,
-        dc.market,
-        t.customer_code,
-        SUM(t.net_sales_amt) AS total_sales
-    FROM transactions t
-    JOIN dim_customer dc
-        ON t.customer_code = dc.customer_code
-    WHERE dc.market = input_market
-      AND t.fiscal_year = input_year
-    GROUP BY
-        dc.customer,
-        dc.market,
-        t.customer_code
-    ORDER BY total_sales DESC
-    LIMIT 5;
-END
+SELECT 
+     dp.product AS product_name, 
+     dp.category, 
+     SUM(t.pre_invoice_disc_amt) as total_pre_disc, 
+     SUM(t.post_invoice_dedns_amt + t. post_invoice_other_dedns_amt) AS total_post_disc, 
+     SUM(t.gross_sales_amt) AS gross_sales, 
+     ROUND(
+         (SUM(t.pre_invoice_disc_amt + t.post_invoice_dedns_amt + t. post_invoice_other_dedns_amt)
+          / NULLIF(SUM(t.gross_sales_amt), 0)) * 100,2
+      ) AS disc_pct 
+FROM transactions t 
+JOIN dim_product dp 
+     ON t.product_code = dp.product_code 
+GROUP BY dp.product, dp.category 
+ORDER BY disc_pct DESC 
+LIMIT 4; 
 
++---------------------+-----------------------------+----------------+-----------------+-------------+----------+
+| product_name        | category                    | total_pre_disc | total_post_disc | gross_sales | disc_pct |
++---------------------+-----------------------------+----------------+-----------------+-------------+----------+
+| AQ MB Elite         | MotherBoard                 |     1426390.91 |      1628435.43 |  6083773.42 |    50.21 |
+| AQ Pen Drive 2 IN 1 | USB Flash Drives            |     1662353.10 |      1877180.31 |  7068299.36 |    50.08 |
+| AQ Pen Drive DRC    | USB Flash Drives            |     3484851.22 |      3933924.31 | 14816237.59 |    50.07 |
+| AQ Clx2             | External Solid State Drives |    12721869.35 |     14316635.79 | 54082122.91 |    50.00 |
++---------------------+-----------------------------+----------------+-----------------+-------------+----------+
 
+***************************************************
+-- Top notebooks with highest discount percentage
+***************************************************
 
+SELECT  
+     dp.product AS product_name,  
+     dp.category,  
+     SUM(t.pre_invoice_disc_amt) as total_pre_disc,  
+     SUM(t.post_invoice_dedns_amt + t. post_invoice_other_dedns_amt) AS total_post_disc,  
+     SUM(t.gross_sales_amt) AS gross_sales,  
+     ROUND(
+         (SUM(t.pre_invoice_disc_amt + t.post_invoice_dedns_amt + t. post_invoice_other_dedns_amt)
+          / NULLIF(SUM(t.gross_sales_amt), 0)) * 100,2
+      ) AS disc_pct  
+FROM transactions t  
+JOIN dim_product dp  
+     ON t.product_code = dp.product_code  
+WHERE dp.segment = "Notebook" 
+GROUP BY dp.product, dp.category  
+ORDER BY disc_pct DESC  
+LIMIT 4; 
 
++--------------+-----------------+----------------+-----------------+--------------+----------+
+| product_name | category        | total_pre_disc | total_post_disc | gross_sales  | disc_pct |
++--------------+-----------------+----------------+-----------------+--------------+----------+
+| AQ Gen X     | Personal Laptop |    48875685.92 |     54261459.41 | 207984284.30 |    49.59 |
+| AQ Gen Y     | Personal Laptop |    50286309.56 |     55996437.03 | 214437703.43 |    49.56 |
+| AQ Digit     | Personal Laptop |    38936152.20 |     43410098.61 | 166320059.19 |    49.51 |
+| AQ BZ Gen Z  | Business Laptop |    71599435.68 |     79496568.12 | 305202809.42 |    49.51 |
++--------------+-----------------+----------------+-----------------+--------------+----------+
 
+***********************************************
+-- Sales and cost structures of the products
+***********************************************
 
+SELECT  
+     dp.product AS product_name, dp.segment, 
+     SUM(t.net_sales_amt) AS total_sales, 
+     SUM(t.total_cogs_amt) AS total_cogs, 
+     SUM(t.net_sales_amt) - SUM(t.total_cogs_amt) AS profit 
+FROM transactions t 
+JOIN dim_product dp 
+     ON t.product_code = dp.product_code 
+WHERE fiscal_year = 2021 
+GROUP BY t.fiscal_year, dp.product, dp.segment 
+HAVING profit > 0 
+ORDER BY profit DESC 
+LIMIT 5; 
 
++---------------+-------------+-------------+-------------+-------------+
+| product_name  | segment     | total_sales | total_cogs  | profit      |
++---------------+-------------+-------------+-------------+-------------+
+| AQ BZ Allin1  | Desktop     | 33749863.01 | 21609108.86 | 12140754.15 |
+| AQ Qwerty     | Accessories | 27839705.75 | 17514698.76 | 10325006.99 |
+| AQ Trigger    | Accessories | 26952840.74 | 17009140.39 |  9943700.35 |
+| AQ Gen Y      | Notebook    | 23577278.46 | 15075367.96 |  8501910.50 |
+| AQ BZ Compact | Notebook    | 22218710.10 | 14005667.21 |  8213042.89 |
++---------------+-------------+-------------+-------------+-------------+
 
--- Top 10 products have the highest total discount percentage
--- Top 10 notebooks with highest discount percentage
--- 
+************************************************
+-- Highest performing customers and products
+************************************************
 
+SELECT  
+      dc.customer AS customer_name, 
+      dp.product AS product_name, 
+      dp.segment AS segment, 
+      dc.market, 
+      t.date, 
+      t.qty, 
+      t.net_sales_amt 
+FROM transactions t 
+JOIN dim_customer dc 
+     ON t.customer_code = dc.customer_code 
+JOIN dim_product dp 
+     ON t.product_code = dp.product_code 
+WHERE t.qty > 4500 
+     AND t.fiscal_year = 2021 
+ORDER BY t.qty DESC; 
+
++---------------+---------------------+---------+-------------+------------+------+---------------+
+| customer_name | product_name        | segment | market      | date       | qty  | net_sales_amt |
++---------------+---------------------+---------+-------------+------------+------+---------------+
+| Sage          | AQ Pen Drive DRC    | Storage | South Korea | 2020-12-01 | 5832 |       8932.10 |
+| Sage          | AQ Pen Drive DRC    | Storage | South Korea | 2020-11-01 | 5788 |       8382.57 |
+| Sage          | AQ Pen Drive DRC    | Storage | South Korea | 2020-12-01 | 5646 |       9861.52 |
+| Leader        | AQ Pen Drive DRC    | Storage | South Korea | 2020-11-01 | 5426 |       7878.12 |
+| Amazon        | AQ Pen Drive DRC    | Storage | India       | 2020-12-01 | 5069 |       9355.86 |
+| Sage          | AQ Pen Drive DRC    | Storage | South Korea | 2020-12-01 | 4819 |      11845.83 |
+| Sage          | AQ Pen Drive 2 IN 1 | Storage | South Korea | 2020-11-01 | 4679 |       9382.96 |
+| Neptune       | AQ Pen Drive DRC    | Storage | China       | 2020-12-01 | 4638 |       9714.11 |
++---------------+---------------------+---------+-------------+------------+------+---------------+
