@@ -15,12 +15,18 @@ The goal was to provide unified insights across Finance, Sales, Marketing, and S
 - **Data Cleaning & Preprocessing** – handled missing values, and performed integration using Pandas.  
 - **SQL Analysis** – generated business summaries (Profit, Sales, Margins), advanced aggregations, and optimized queries for large datasets.  
 - **Data Modeling (Snowflake Schema)** – created dim_date table and designed fact and dimension tables to create a scalable and efficient Power BI data model.
--  **Power BI Dashboard** – built interactive dashboards for:
-  - Finance (P&L, Margin Tracking)  
-  - Sales (Customer Performance, Region-wise Sales)  
-  - Marketing (Campaign Impact, Product Trends)  
-  - Supply Chain (Inventory, Demand Fulfillment)  
-  - Executive View (Unified KPIs)  
+-  **Power BI Dashboard** – Built interactive dashboard with:
+
+1. Finance View – Profit & Loss metrics and trend analysis
+
+2. Sales View – Region-wise sales performance and margin tracking
+
+3. Marketing View – Customer and product performance with profitability insights
+
+4. Supply Chain View – Forecast accuracy, net error, and risk monitoring
+
+5. Executive View – Unified KPIs across business functions
+
 - **Machine Learning Applications** –  Discount Anomaly Detection, Customer Segmentation (Clustering), Recommendation System for product
  
   
